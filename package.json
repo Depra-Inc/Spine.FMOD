@@ -1,0 +1,18 @@
+{
+  "name": "com.depra.spine.integration.fmod",
+  "displayName": "Depra.Spine.Integration.FMOD",
+  "version": "0.0.1",
+  "unity": "2021.3",
+  "hideInEditor": false,
+  "keywords": [
+    "Spine",
+    "Integration",
+    "FMOD",
+    "Sound",
+    "Event"
+  ],
+  "license": "Apache-2.0",
+  "description": "Integration module for UnityEngine to support FMOD sound event calls via Spine.",
+  "type": "module",
+  "unityRelease": "24f1"
+}
