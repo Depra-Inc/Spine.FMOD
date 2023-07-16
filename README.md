@@ -63,24 +63,16 @@ choose your animations number.
 <img width="600px" src="https://i.ibb.co/QbKJmZk/debuglog.png">
 </p>
 
-
 ### Tested
 
 - Unity 2018.4
 - Unity 2019.2.
 - Unity 2019.3.
+
 - spine-unity-3_7-2019-04-18
 - spine-unity-3.8-2020-07-14
-- fmodstudio11010_v2
-- fmodstudio20010
+- spine-unity-4.1-2023-06-27
 
-
-## Social
-
-- [Linkedin](https://www.linkedin.com/in/francescocorsello/)
-- [Unity Asset Store](https://assetstore.unity.com/publishers/50431)
-- [Youtube](https://www.youtube.com/channel/UCr8On74pIdwY67xFR4dEI7w/featured?view_as=subscriber)
-- [Instagram](https://www.instagram.com/francescorsell0/)
-- [![Twitter Follow](https://img.shields.io/twitter/follow/francescorsell0.svg?style=social)](https://twitter.com/francescorsell0)  
-
-
+- fmodstudio-1.10.10_v2
+- fmodstudio-2.00.10
+- fmodstudio-2.02.15
