@@ -19,6 +19,14 @@ namespace Depra.Spine.Integration.FMOD.Runtime
             _eventsMap = _animationSounds
                 .ToDictionary(x => x.SpineAnimation, x => x);
 
+        private void Start()
+        {
+            if (_skeletonAnimation.AnimationState.Data.SkeletonData.Animations.Count > 0)
+            {
+                OnAnimationStarted(_skeletonAnimation.AnimationState.GetCurrent(0));
+            }
+        }
+
         private void OnEnable() =>
             _skeletonAnimation.AnimationState.Start += OnAnimationStarted;
 
