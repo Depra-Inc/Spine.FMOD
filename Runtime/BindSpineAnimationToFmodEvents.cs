@@ -1,18 +1,14 @@
-﻿// Copyright © 2023 Nikolay Melnikov. All rights reserved.
-// SPDX-License-Identifier: Apache-2.0
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using FMODUnity;
 using Spine;
 using Spine.Unity;
 using UnityEngine;
-using Event = Spine.Event;
 
 namespace Depra.Spine.Integration.FMOD.Runtime
 {
-    public sealed class BindSpineEventsToFmodEvents : MonoBehaviour
+    public sealed class BindSpineAnimationToFmodEvents : MonoBehaviour
     {
         [SerializeField] private SkeletonAnimation _skeletonAnimation;
         [SerializeField] private List<AnimationSound> _animationSounds;
@@ -21,18 +17,18 @@ namespace Depra.Spine.Integration.FMOD.Runtime
 
         private void Awake() =>
             _eventsMap = _animationSounds
-                .ToDictionary(x => x.SpineEvent, x => x);
+                .ToDictionary(x => x.SpineAnimation, x => x);
 
         private void OnEnable() =>
-            _skeletonAnimation.AnimationState.Event += OnEvent;
+            _skeletonAnimation.AnimationState.Start += OnAnimationStarted;
 
         private void OnDisable() =>
-            _skeletonAnimation.AnimationState.Event -= OnEvent;
+            _skeletonAnimation.AnimationState.Start -= OnAnimationStarted;
 
-        private void OnEvent(TrackEntry trackEntry, Event @event)
+        private void OnAnimationStarted(TrackEntry trackEntry)
         {
-            var eventName = @event.Data.Name;
-            if (_eventsMap.TryGetValue(eventName, out var animationSound) == false)
+            var animationName = trackEntry.Animation.Name;
+            if (_eventsMap.TryGetValue(animationName, out var animationSound) == false)
             {
                 return;
             }
@@ -41,7 +37,7 @@ namespace Depra.Spine.Integration.FMOD.Runtime
 
             if (animationSound.Verbose)
             {
-                Debug.Log($"{nameof(BindSpineEventsToFmodEvents)} Event: {eventName}");
+                Debug.Log($"{nameof(BindSpineAnimationToFmodEvents)} Animation: {animationName}");
             }
         }
 
@@ -56,16 +52,16 @@ namespace Depra.Spine.Integration.FMOD.Runtime
         [Serializable]
         private sealed class AnimationSound
         {
-            [Tooltip("Insert Spine audio event name here")]
-            [SpineEvent(dataField: nameof(_skeletonAnimation), fallbackToTextField: true)]
-            [SerializeField] private string _spineEvent;
+            [Tooltip("Insert Spine animation name here")]
+            [SpineAnimation(dataField: nameof(_skeletonAnimation), fallbackToTextField: true)]
+            [SerializeField] private string _spineAnimation;
 
-            [Tooltip("Insert FMOD Event here")]
+            [Tooltip("Insert FMOD event here")]
             [SerializeField] private EventReference _fmodEvent;
 
             [field: SerializeField] public bool Verbose { get; private set; }
 
-            public string SpineEvent => _spineEvent;
+            public string SpineAnimation => _spineAnimation;
 
             public EventReference FmodEvent => _fmodEvent;
         }
