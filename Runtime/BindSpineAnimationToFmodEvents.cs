@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright © 2023 Nikolay Melnikov. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using FMODUnity;
@@ -10,6 +13,7 @@ namespace Depra.Spine.Integration.FMOD.Runtime
 {
     public sealed class BindSpineAnimationToFmodEvents : MonoBehaviour
     {
+        [SerializeField] private Transform _soundPoint;
         [SerializeField] private SkeletonAnimation _skeletonAnimation;
         [SerializeField] private List<AnimationSound> _animationSounds;
 
@@ -41,7 +45,7 @@ namespace Depra.Spine.Integration.FMOD.Runtime
                 return;
             }
 
-            RuntimeManager.PlayOneShot(animationSound.FmodEvent, transform.position);
+            PlaySound(animationSound);
 
             if (animationSound.Verbose)
             {
@@ -49,29 +53,39 @@ namespace Depra.Spine.Integration.FMOD.Runtime
             }
         }
 
+        private void PlaySound(AnimationSound sound)
+        {
+            if (sound.Attached)
+            {
+                RuntimeManager.PlayOneShotAttached(sound.FmodEvent, _soundPoint.gameObject);
+            }
+            else
+            {
+                RuntimeManager.PlayOneShot(sound.FmodEvent, _soundPoint.position);
+            }
+        }
+
         private void OnValidate()
         {
-            if (_skeletonAnimation == null)
-            {
-                _skeletonAnimation = GetComponent<SkeletonAnimation>();
-            }
+            _soundPoint ??= transform;
+            _skeletonAnimation ??= GetComponent<SkeletonAnimation>();
         }
 
         [Serializable]
         private sealed class AnimationSound
         {
-            [Tooltip("Insert Spine animation name here")]
-            [SpineAnimation(dataField: nameof(_skeletonAnimation), fallbackToTextField: true)]
-            [SerializeField] private string _spineAnimation;
+            [field: Tooltip("Insert Spine animation name here.")]
+            [field: SpineAnimation(dataField: nameof(_skeletonAnimation), fallbackToTextField: true)]
+            [field: SerializeField] public string SpineAnimation { get; private set; }
 
-            [Tooltip("Insert FMOD event here")]
-            [SerializeField] private EventReference _fmodEvent;
+            [field: Tooltip("Insert FMOD event here.")]
+            [field: SerializeField] public EventReference FmodEvent { get; private set; }
+
+            [field: Tooltip("Follows the given game object or not. " +
+                            "If false, the sound will be played at the transform position.")]
+            [field: SerializeField] public bool Attached { get; private set; }
 
             [field: SerializeField] public bool Verbose { get; private set; }
-
-            public string SpineAnimation => _spineAnimation;
-
-            public EventReference FmodEvent => _fmodEvent;
         }
     }
 }
