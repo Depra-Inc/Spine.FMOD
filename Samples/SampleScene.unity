@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   attenuationObject: {fileID: 0}
---- !u!1001 &7724027286066147719
+--- !u!1001 &4124369481238840704
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -228,47 +228,47 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 4681443227999017826, guid: 0a8c63e3f45cb2144981da271432e31b, type: 3}
+    - target: {fileID: 5499677875616588225, guid: 0a8c63e3f45cb2144981da271432e31b, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4681443227999017826, guid: 0a8c63e3f45cb2144981da271432e31b, type: 3}
+    - target: {fileID: 5499677875616588225, guid: 0a8c63e3f45cb2144981da271432e31b, type: 3}
       propertyPath: m_LocalPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4681443227999017826, guid: 0a8c63e3f45cb2144981da271432e31b, type: 3}
+    - target: {fileID: 5499677875616588225, guid: 0a8c63e3f45cb2144981da271432e31b, type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4681443227999017826, guid: 0a8c63e3f45cb2144981da271432e31b, type: 3}
+    - target: {fileID: 5499677875616588225, guid: 0a8c63e3f45cb2144981da271432e31b, type: 3}
       propertyPath: m_LocalRotation.w
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 4681443227999017826, guid: 0a8c63e3f45cb2144981da271432e31b, type: 3}
+    - target: {fileID: 5499677875616588225, guid: 0a8c63e3f45cb2144981da271432e31b, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4681443227999017826, guid: 0a8c63e3f45cb2144981da271432e31b, type: 3}
+    - target: {fileID: 5499677875616588225, guid: 0a8c63e3f45cb2144981da271432e31b, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4681443227999017826, guid: 0a8c63e3f45cb2144981da271432e31b, type: 3}
+    - target: {fileID: 5499677875616588225, guid: 0a8c63e3f45cb2144981da271432e31b, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
-    - target: {fileID: 4681443227999017826, guid: 0a8c63e3f45cb2144981da271432e31b, type: 3}
+    - target: {fileID: 5499677875616588225, guid: 0a8c63e3f45cb2144981da271432e31b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4681443227999017826, guid: 0a8c63e3f45cb2144981da271432e31b, type: 3}
+    - target: {fileID: 5499677875616588225, guid: 0a8c63e3f45cb2144981da271432e31b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4681443227999017826, guid: 0a8c63e3f45cb2144981da271432e31b, type: 3}
+    - target: {fileID: 5499677875616588225, guid: 0a8c63e3f45cb2144981da271432e31b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4872987829082976385, guid: 0a8c63e3f45cb2144981da271432e31b, type: 3}
+    - target: {fileID: 6992814285521318546, guid: 0a8c63e3f45cb2144981da271432e31b, type: 3}
       propertyPath: m_Name
       value: Depra.Spine.FMOD.Sample
       objectReference: {fileID: 0}
@@ -282,4 +282,4 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 963194228}
-  - {fileID: 7724027286066147719}
+  - {fileID: 4124369481238840704}
