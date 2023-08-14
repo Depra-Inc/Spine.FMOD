@@ -3,7 +3,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using Depra.Spine.FMOD.Runtime.Binding;
+using Depra.Spine.FMOD.Runtime.Binds;
 
 namespace Depra.Spine.FMOD.Runtime.Extensions
 {

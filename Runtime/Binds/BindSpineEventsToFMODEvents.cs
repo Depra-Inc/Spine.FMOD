@@ -12,7 +12,7 @@ using UnityEngine;
 using static Depra.Spine.FMOD.Runtime.Common.Constants;
 using Event = Spine.Event;
 
-namespace Depra.Spine.FMOD.Runtime.Binding
+namespace Depra.Spine.FMOD.Runtime.Binds
 {
 	[AddComponentMenu(MENU_NAME, DEFAULT_ORDER)]
 	internal sealed class BindSpineEventsToFMODEvents : MonoBehaviour

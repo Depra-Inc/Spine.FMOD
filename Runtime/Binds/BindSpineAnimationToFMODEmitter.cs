@@ -11,7 +11,7 @@ using Spine.Unity;
 using UnityEngine;
 using static Depra.Spine.FMOD.Runtime.Common.Constants;
 
-namespace Depra.Spine.FMOD.Runtime.Binding
+namespace Depra.Spine.FMOD.Runtime.Binds
 {
 	[AddComponentMenu(MENU_NAME, DEFAULT_ORDER)]
 	internal sealed class BindSpineAnimationToFMODEmitter : MonoBehaviour
