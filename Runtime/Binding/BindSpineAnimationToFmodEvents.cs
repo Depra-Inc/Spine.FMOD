@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using Depra.Spine.FMOD.Runtime.Extensions;
+using Depra.Spine.FMOD.Runtime.Utils;
 using FMODUnity;
 using Spine;
 using Spine.Unity;
@@ -17,7 +18,6 @@ namespace Depra.Spine.FMOD.Runtime.Binding
 	{
 		private const string MENU_NAME = MODULE_PATH + "/" + nameof(BindSpineAnimationToFMODEvents);
 
-		[SerializeField] private Transform _sourcePoint;
 		[SerializeField] private SkeletonAnimation _animation;
 		[SerializeField] private SoundEventDefinition[] _soundEvents;
 
@@ -35,21 +35,16 @@ namespace Depra.Spine.FMOD.Runtime.Binding
 			_animation.AnimationState.Start += OnAnimationStarted;
 		}
 
-		private void OnDisable() =>
-			_animation.AnimationState.Start -= OnAnimationStarted;
+		private void OnDisable() => _animation.AnimationState.Start -= OnAnimationStarted;
 
-		private void OnValidate()
-		{
-			_sourcePoint ??= transform;
-			_animation ??= GetComponent<SkeletonAnimation>();
-		}
+		private void OnValidate() => _animation ??= GetComponent<SkeletonAnimation>();
 
 		private void OnAnimationStarted(TrackEntry trackEntry)
 		{
 			var animationName = trackEntry.Animation.Name;
 			if (_eventsMap.TryGetValue(animationName, out var soundEvent))
 			{
-				soundEvent.Play(animationName, _sourcePoint);
+				soundEvent.Play(animationName);
 			}
 		}
 
@@ -63,45 +58,15 @@ namespace Depra.Spine.FMOD.Runtime.Binding
 			[Tooltip("Insert FMOD event here.")]
 			[SerializeField] private EventReference _fmodEvent;
 
-			[Tooltip("Follows the given transform for 3D pointing or not. " +
-			         "If false, the sound will be played at the transform position.")]
-			[SerializeField] private bool _followToSource;
-
-			[SerializeField] public bool _attachToSource;
-
-			[Tooltip("Enable logging.")]
-			[SerializeField] public bool _verbose;
+			[SerializeField] private FMODEventDecorator[] _decorators;
 
 			string ISoundEvent.Key => _spineAnimation;
 
-			void ISoundEvent.Play(string animationName, Transform sourcePoint)
+			void ISoundEvent.Play(string animationName)
 			{
-				if (_attachToSource)
-				{
-					var @event = RuntimeManager.CreateInstance(_fmodEvent);
-					@event.start();
-					// @event.setCallback(() => , )
-					if (_followToSource)
-					{
-						RuntimeManager.AttachInstanceToGameObject(@event, sourcePoint);
-					}
-				}
-				else
-				{
-					if (_followToSource)
-					{
-						RuntimeManager.PlayOneShotAttached(_fmodEvent, sourcePoint.gameObject);
-					}
-					else
-					{
-						RuntimeManager.PlayOneShot(_fmodEvent, sourcePoint.position);
-					}
-				}
-
-				if (_verbose)
-				{
-					Debug.Log($"{nameof(BindSpineEventsToFMODEvents)} Event: {animationName}");
-				}
+				var eventInstance = RuntimeManager.CreateInstance(_fmodEvent);
+				eventInstance.start();
+				_decorators.Decorate(animationName, eventInstance);
 			}
 		}
 	}

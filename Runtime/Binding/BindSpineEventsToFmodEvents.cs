@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using Depra.Spine.FMOD.Runtime.Extensions;
+using Depra.Spine.FMOD.Runtime.Utils;
 using FMODUnity;
 using Spine;
 using Spine.Unity;
@@ -18,32 +19,27 @@ namespace Depra.Spine.FMOD.Runtime.Binding
 	{
 		private const string MENU_NAME = MODULE_PATH + "/" + nameof(BindSpineEventsToFMODEvents);
 
-		[SerializeField] private Transform _sourcePoint;
 		[SerializeField] private SkeletonAnimation _animation;
 		[SerializeField] private SoundEventDefinition[] _soundEvents;
 
 		private Dictionary<string, ISoundEvent> _eventsMap;
 
-		private void Awake() =>_eventsMap = _soundEvents.Flatten();
+		private void Awake() => _eventsMap = _soundEvents.Flatten();
 
-		private void OnEnable() =>_animation.AnimationState.Event += OnEvent;
+		private void OnEnable() => _animation.AnimationState.Event += OnEvent;
 
-		private void OnDisable() =>_animation.AnimationState.Event += OnEvent;
+		private void OnDisable() => _animation.AnimationState.Event += OnEvent;
 
 		private void OnEvent(TrackEntry track, Event @event)
 		{
 			var eventName = @event.Data.Name;
 			if (_eventsMap.TryGetValue(eventName, out var animationSound))
 			{
-				animationSound.Play(eventName, _sourcePoint);
+				animationSound.Play(eventName);
 			}
 		}
 
-		private void OnValidate()
-		{
-			_sourcePoint ??= transform;
-			_animation ??= GetComponent<SkeletonAnimation>();
-		}
+		private void OnValidate() => _animation ??= GetComponent<SkeletonAnimation>();
 
 		[Serializable]
 		private sealed record SoundEventDefinition : ISoundEvent
@@ -54,30 +50,15 @@ namespace Depra.Spine.FMOD.Runtime.Binding
 
 			[Tooltip("Insert FMOD Event here")]
 			[SerializeField] public EventReference _fmodEvent;
-
-			[Tooltip("Follows the given game object or not. " +
-			         "If false, the sound will be played at the transform position.")]
-			[SerializeField] private bool _attached;
-
-			[SerializeField] private bool _verbose;
+			[SerializeField] private FMODEventDecorator[] _decorators;
 
 			string ISoundEvent.Key => _spineEvent;
 
-			void ISoundEvent.Play(string eventName, Transform sourcePoint)
+			void ISoundEvent.Play(string eventName)
 			{
-				if (_attached)
-				{
-					RuntimeManager.PlayOneShotAttached(_fmodEvent, sourcePoint.gameObject);
-				}
-				else
-				{
-					RuntimeManager.PlayOneShot(_fmodEvent, sourcePoint.position);
-				}
-
-				if (_verbose)
-				{
-					Debug.Log($"{nameof(BindSpineEventsToFMODEvents)} Event: {eventName}");
-				}
+				var eventInstance = RuntimeManager.CreateInstance(_fmodEvent);
+				_decorators.Decorate(eventName, eventInstance);
+				eventInstance.start();
 			}
 		}
 	}

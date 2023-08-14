@@ -50,7 +50,7 @@ namespace Depra.Spine.FMOD.Runtime.Binding
 
 			string ISoundEvent.Key => _spineEvent;
 
-			void ISoundEvent.Play(string eventName, Transform sourcePoint)
+			void ISoundEvent.Play(string eventName)
 			{
 				_emitter.Play();
 

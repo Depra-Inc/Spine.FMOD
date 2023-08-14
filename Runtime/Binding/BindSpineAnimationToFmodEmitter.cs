@@ -14,7 +14,6 @@ namespace Depra.Spine.FMOD.Runtime.Binding
 	{
 		private const string MENU_NAME = MODULE_PATH + "/" + nameof(BindSpineAnimationToFMODEmitter);
 
-		[SerializeField] private Transform _sourcePoint;
 		[SerializeField] private SkeletonAnimation _animation;
 		[SerializeField] private SoundEventDefinition[] _soundEvents;
 
@@ -34,18 +33,14 @@ namespace Depra.Spine.FMOD.Runtime.Binding
 
 		private void OnDisable() => _animation.AnimationState.Start -= OnAnimationStarted;
 
-		private void OnValidate()
-		{
-			_sourcePoint ??= transform;
-			_animation ??= GetComponent<SkeletonAnimation>();
-		}
+		private void OnValidate() => _animation ??= GetComponent<SkeletonAnimation>();
 
 		private void OnAnimationStarted(TrackEntry trackEntry)
 		{
 			var animationName = trackEntry.Animation.Name;
 			if (_eventsMap.TryGetValue(animationName, out var soundEvent))
 			{
-				soundEvent.Play(animationName, _sourcePoint);
+				soundEvent.Play(animationName);
 			}
 		}
 
@@ -64,7 +59,7 @@ namespace Depra.Spine.FMOD.Runtime.Binding
 
 			string ISoundEvent.Key => _spineAnimation;
 
-			void ISoundEvent.Play(string animationName, Transform sourcePoint)
+			void ISoundEvent.Play(string animationName)
 			{
 				_emitter.Play();
 

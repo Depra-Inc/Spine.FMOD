@@ -63,6 +63,55 @@ MonoBehaviour:
   OverrideAttenuation: 0
   OverrideMinDistance: -1
   OverrideMaxDistance: -1
+--- !u!1 &2620404717573349458
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5190619717932154941}
+  - component: {fileID: 5851084139603335832}
+  m_Layer: 0
+  m_Name: Utils
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5190619717932154941
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2620404717573349458}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5499677875616588225}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5851084139603335832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2620404717573349458}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9f1864d6bce842f3996adb3646665192, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _callbacks:
+  - _eventType: 0
+    _callback:
+      m_PersistentCalls:
+        m_Calls: []
 --- !u!1 &3423750517619885190
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,6 +271,7 @@ Transform:
   m_Children:
   - {fileID: 3675163272271190806}
   - {fileID: 40995324076777608}
+  - {fileID: 5190619717932154941}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1180226980562561874
@@ -253,7 +303,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f367f8214fe7022429090bfb5e7bac6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sourcePoint: {fileID: 5499677875616588225}
   _animation: {fileID: 9204885384980262444}
   _soundEvents:
   - _spineEvent: 
@@ -264,8 +313,7 @@ MonoBehaviour:
         Data3: 0
         Data4: 0
       Path: 
-    _attached: 0
-    _verbose: 0
+    _decorators: []
 --- !u!114 &7752105397888332481
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,7 +326,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ab1eee520cd4ef29ac8a3d0d0aa5cc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sourcePoint: {fileID: 3675163272271190806}
   _animation: {fileID: 9204885384980262444}
   _soundEvents:
   - _spineAnimation: 
@@ -296,7 +343,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b6466ca8455a484897860f894ad16431, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _sourcePoint: {fileID: 5499677875616588225}
   _animation: {fileID: 9204885384980262444}
   _soundEvents:
   - _spineAnimation: 
@@ -307,6 +353,5 @@ MonoBehaviour:
         Data3: 0
         Data4: 0
       Path: 
-    _followToSource: 0
-    _attachToSource: 0
-    _verbose: 0
+    _decorators:
+    - {fileID: 0}
