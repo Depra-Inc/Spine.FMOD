@@ -42,7 +42,7 @@ namespace Depra.Spine.FMOD.Runtime.Binding
 		private void OnValidate() => _animation ??= GetComponent<SkeletonAnimation>();
 
 		[Serializable]
-		private sealed record SoundEventDefinition : ISoundEvent
+		private sealed class SoundEventDefinition : ISoundEvent
 		{
 			[Tooltip("Insert Spine audio event name here")]
 			[SpineEvent(dataField: nameof(_animation), fallbackToTextField: true)]

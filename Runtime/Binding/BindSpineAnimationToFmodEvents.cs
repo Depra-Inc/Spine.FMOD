@@ -49,7 +49,7 @@ namespace Depra.Spine.FMOD.Runtime.Binding
 		}
 
 		[Serializable]
-		private sealed record SoundEventDefinition : ISoundEvent
+		private sealed class SoundEventDefinition : ISoundEvent
 		{
 			[Tooltip("Insert Spine animation name here.")]
 			[SpineAnimation(dataField: nameof(_animation), fallbackToTextField: true)]

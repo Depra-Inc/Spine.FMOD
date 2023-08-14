@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright © 2023 Nikolay Melnikov. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
+using System;
 using System.Collections.Generic;
 using Depra.Spine.FMOD.Runtime.Extensions;
 using Depra.Spine.FMOD.Runtime.Utils;
@@ -37,7 +40,7 @@ namespace Depra.Spine.FMOD.Runtime.Binding
 		}
 
 		[Serializable]
-		private sealed record SoundEventDefinition : ISoundEvent
+		private sealed class SoundEventDefinition : ISoundEvent
 		{
 			[Tooltip("Insert Spine audio event name here")]
 			[SpineEvent(dataField: nameof(_animation), fallbackToTextField: true)]
