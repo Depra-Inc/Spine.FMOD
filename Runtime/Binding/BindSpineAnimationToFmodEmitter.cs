@@ -10,9 +10,9 @@ using static Depra.Spine.FMOD.Runtime.Common.Constants;
 namespace Depra.Spine.FMOD.Runtime.Binding
 {
 	[AddComponentMenu(MENU_NAME, DEFAULT_ORDER)]
-	public sealed class BindSpineAnimationToFmodEmitter : MonoBehaviour
+	internal sealed class BindSpineAnimationToFMODEmitter : MonoBehaviour
 	{
-		private const string MENU_NAME = MODULE_PATH + "/" + nameof(BindSpineAnimationToFmodEmitter);
+		private const string MENU_NAME = MODULE_PATH + "/" + nameof(BindSpineAnimationToFMODEmitter);
 
 		[SerializeField] private Transform _sourcePoint;
 		[SerializeField] private SkeletonAnimation _animation;
@@ -22,19 +22,17 @@ namespace Depra.Spine.FMOD.Runtime.Binding
 
 		private void Awake() => _eventsMap = _soundEvents.Flatten();
 
-		private void Start()
+		private void OnEnable()
 		{
 			if (_animation.AnimationState.Data.SkeletonData.Animations.Count > 0)
 			{
 				OnAnimationStarted(_animation.AnimationState.GetCurrent(0));
 			}
+
+			_animation.AnimationState.Start += OnAnimationStarted;
 		}
 
-		private void OnEnable() =>
-			_animation.AnimationState.Start += OnAnimationStarted;
-
-		private void OnDisable() =>
-			_animation.AnimationState.Start -= OnAnimationStarted;
+		private void OnDisable() => _animation.AnimationState.Start -= OnAnimationStarted;
 
 		private void OnValidate()
 		{
@@ -72,7 +70,7 @@ namespace Depra.Spine.FMOD.Runtime.Binding
 
 				if (_verbose)
 				{
-					Debug.Log($"{nameof(BindSpineEventsToFmodEvents)} Event: {animationName}");
+					Debug.Log($"{nameof(BindSpineEventsToFMODEvents)} Event: {animationName}");
 				}
 			}
 		}

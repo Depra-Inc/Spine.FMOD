@@ -13,9 +13,9 @@ using static Depra.Spine.FMOD.Runtime.Common.Constants;
 namespace Depra.Spine.FMOD.Runtime.Binding
 {
 	[AddComponentMenu(MENU_NAME, DEFAULT_ORDER)]
-	public sealed class BindSpineAnimationToFmodEvents : MonoBehaviour
+	internal sealed class BindSpineAnimationToFMODEvents : MonoBehaviour
 	{
-		private const string MENU_NAME = MODULE_PATH + "/" + nameof(BindSpineAnimationToFmodEvents);
+		private const string MENU_NAME = MODULE_PATH + "/" + nameof(BindSpineAnimationToFMODEvents);
 
 		[SerializeField] private Transform _sourcePoint;
 		[SerializeField] private SkeletonAnimation _animation;
@@ -25,16 +25,15 @@ namespace Depra.Spine.FMOD.Runtime.Binding
 
 		private void Awake() => _eventsMap = _soundEvents.Flatten();
 
-		private void Start()
+		private void OnEnable()
 		{
 			if (_animation.AnimationState.Data.SkeletonData.Animations.Count > 0)
 			{
 				OnAnimationStarted(_animation.AnimationState.GetCurrent(0));
 			}
-		}
 
-		private void OnEnable() =>
 			_animation.AnimationState.Start += OnAnimationStarted;
+		}
 
 		private void OnDisable() =>
 			_animation.AnimationState.Start -= OnAnimationStarted;
@@ -101,7 +100,7 @@ namespace Depra.Spine.FMOD.Runtime.Binding
 
 				if (_verbose)
 				{
-					Debug.Log($"{nameof(BindSpineEventsToFmodEvents)} Event: {animationName}");
+					Debug.Log($"{nameof(BindSpineEventsToFMODEvents)} Event: {animationName}");
 				}
 			}
 		}
