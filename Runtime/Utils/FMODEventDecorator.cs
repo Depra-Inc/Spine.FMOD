@@ -1,4 +1,7 @@
-﻿using FMOD.Studio;
+﻿// Copyright © 2023 Nikolay Melnikov. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
+using FMOD.Studio;
 using UnityEngine;
 
 namespace Depra.Spine.FMOD.Runtime.Utils

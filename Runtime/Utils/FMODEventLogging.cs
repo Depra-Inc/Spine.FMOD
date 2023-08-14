@@ -1,4 +1,7 @@
-﻿using FMOD.Studio;
+﻿// Copyright © 2023 Nikolay Melnikov. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
+using FMOD.Studio;
 using UnityEngine;
 using static Depra.Spine.FMOD.Runtime.Common.Constants;
 
@@ -9,7 +12,9 @@ namespace Depra.Spine.FMOD.Runtime.Utils
 	{
 		private const string MENU_NAME = MODULE_PATH + "/" + nameof(FMODEventFollowingRigidbody);
 
+		[SerializeField] private string _format = "FMOD Event was triggered: {0}";
+
 		public override void Decorate(string eventName, EventInstance eventInstance) =>
-			Debug.Log($"FMOD Event was triggered: {eventName}");
+			Debug.Log(string.Format(_format, eventName));
 	}
 }
