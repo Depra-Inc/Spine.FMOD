@@ -3,18 +3,18 @@
 
 using System;
 using System.Collections.Generic;
+using Depra.Spine.FMOD.Runtime.Extensions;
 using FMODUnity;
 using Spine;
 using Spine.Unity;
 using UnityEngine;
 using static Depra.Spine.FMOD.Runtime.Common.Constants;
-using AnimationState = Spine.AnimationState;
 using Event = Spine.Event;
 
 namespace Depra.Spine.FMOD.Runtime.Binding
 {
 	[AddComponentMenu(MENU_NAME, DEFAULT_ORDER)]
-	public sealed partial class BindSpineEventsToFmodEvents : MonoBehaviour
+	public sealed class BindSpineEventsToFmodEvents : MonoBehaviour
 	{
 		private const string MENU_NAME = MODULE_PATH + "/" + nameof(BindSpineEventsToFmodEvents);
 

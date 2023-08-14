@@ -1,15 +1,10 @@
-﻿using UnityEngine;
-using AnimationState = Spine.AnimationState;
+﻿// Copyright © 2023 Nikolay Melnikov. All rights reserved.
+// SPDX-License-Identifier: Apache-2.0
+
+using UnityEngine;
 
 namespace Depra.Spine.FMOD.Runtime.Binding
 {
-	internal interface ISpineEventSource
-	{
-		void Subscribe();
-
-		void Unsubscribe();
-	}
-
 	internal interface ISoundEvent
 	{
 		string Key { get; }

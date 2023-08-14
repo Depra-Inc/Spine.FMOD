@@ -1,7 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Depra.Spine.FMOD.Runtime.Binding;
 
-namespace Depra.Spine.FMOD.Runtime.Binding
+namespace Depra.Spine.FMOD.Runtime.Extensions
 {
 	internal static class SoundEventEnumerableExtensions
 	{

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Depra.Spine.FMOD.Runtime.Extensions;
 using FMODUnity;
 using Spine;
 using Spine.Unity;
