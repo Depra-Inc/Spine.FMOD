@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using Depra.Spine.FMOD.Runtime.Extensions;
+using Depra.Spine.FMOD.Runtime.Utils;
 using FMODUnity;
 using Spine;
 using Spine.Unity;
@@ -57,19 +58,15 @@ namespace Depra.Spine.FMOD.Runtime.Binding
 			[Tooltip("Insert FMOD Studio Event Emitter")]
 			[SerializeField] private StudioEventEmitter _emitter;
 
-			[Tooltip("Enable logging.")]
-			[SerializeField] public bool _verbose;
+			[Tooltip("Optional extensions for the event instance.")]
+			[SerializeField] private FMODEventDecorator[] _decorators;
 
 			string ISoundEvent.Key => _spineAnimation;
 
 			void ISoundEvent.Play(string animationName)
 			{
 				_emitter.Play();
-
-				if (_verbose)
-				{
-					Debug.Log($"{nameof(BindSpineEventsToFMODEvents)} Event: {animationName}");
-				}
+				_decorators.Decorate(animationName, _emitter.EventInstance);
 			}
 		}
 	}
