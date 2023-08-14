@@ -17,7 +17,8 @@ namespace Depra.Spine.FMOD.Runtime.Binding
 	[AddComponentMenu(MENU_NAME, DEFAULT_ORDER)]
 	internal sealed class BindSpineEventsToFMODEvents : MonoBehaviour
 	{
-		private const string MENU_NAME = MODULE_PATH + "/" + nameof(BindSpineEventsToFMODEvents);
+		private const string FILE_NAME = nameof(BindSpineEventsToFMODEvents);
+		private const string MENU_NAME = MODULE_PATH + SEPARATOR + FILE_NAME;
 
 		[SerializeField] private SkeletonAnimation _animation;
 		[SerializeField] private SoundEventDefinition[] _soundEvents;
@@ -30,6 +31,8 @@ namespace Depra.Spine.FMOD.Runtime.Binding
 
 		private void OnDisable() => _animation.AnimationState.Event += OnEvent;
 
+		private void OnValidate() => _animation ??= GetComponent<SkeletonAnimation>();
+
 		private void OnEvent(TrackEntry track, Event @event)
 		{
 			var eventName = @event.Data.Name;
@@ -38,8 +41,6 @@ namespace Depra.Spine.FMOD.Runtime.Binding
 				animationSound.Play(eventName);
 			}
 		}
-
-		private void OnValidate() => _animation ??= GetComponent<SkeletonAnimation>();
 
 		[Serializable]
 		private sealed class SoundEventDefinition : ISoundEvent

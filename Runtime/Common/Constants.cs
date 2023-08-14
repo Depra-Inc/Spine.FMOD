@@ -9,6 +9,7 @@ namespace Depra.Spine.FMOD.Runtime.Common
 		public const string MODULE_NAME = "Spine.FMOD";
 		public const string MODULE_PATH = FRAMEWORK_NAME + "/" + MODULE_NAME;
 
+		internal const string SEPARATOR = "/";
 		internal const int DEFAULT_ORDER = 52;
 	}
 }

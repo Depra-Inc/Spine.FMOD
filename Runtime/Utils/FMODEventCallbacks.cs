@@ -13,7 +13,8 @@ namespace Depra.Spine.FMOD.Runtime.Utils
 	[AddComponentMenu(MENU_NAME, DEFAULT_ORDER)]
 	internal sealed class FMODEventCallbacks : FMODEventDecorator
 	{
-		private const string MENU_NAME = MODULE_PATH + "/" + nameof(FMODEventCallbacks);
+		private const string FILE_NAME = nameof(FMODEventCallbacks);
+		private const string MENU_NAME = MODULE_PATH + SEPARATOR + FILE_NAME;
 
 		[SerializeField] private Pair[] _callbacks;
 

@@ -15,13 +15,14 @@ namespace Depra.Spine.FMOD.Runtime.Utils
 	[AddComponentMenu(MENU_NAME, DEFAULT_ORDER)]
 	internal sealed class FMODEventFollowingTransform : FMODEventDecorator
 	{
-		private const string MENU_NAME = MODULE_PATH + "/" + nameof(FMODEventFollowingTransform);
+		private const string FILE_NAME = nameof(FMODEventFollowingTransform);
+		private const string MENU_NAME = MODULE_PATH + SEPARATOR + FILE_NAME;
 
 		[SerializeField] private Transform _sourcePoint;
 
 		public override void Decorate(string eventName, EventInstance eventInstance) =>
 			RuntimeManager.AttachInstanceToGameObject(eventInstance, _sourcePoint);
 
-		private void OnValidate() =>_sourcePoint ??= transform;
+		private void OnValidate() => _sourcePoint ??= transform;
 	}
 }

@@ -10,7 +10,8 @@ namespace Depra.Spine.FMOD.Runtime.Utils
 	[AddComponentMenu(MENU_NAME, DEFAULT_ORDER)]
 	internal sealed class FMODEventLogging : FMODEventDecorator
 	{
-		private const string MENU_NAME = MODULE_PATH + "/" + nameof(FMODEventFollowingRigidbody);
+		private const string FILE_NAME = nameof(FMODEventLogging);
+		private const string MENU_NAME = MODULE_PATH + SEPARATOR + FILE_NAME;
 
 		[SerializeField] private string _format = "FMOD Event was triggered: {0}";
 

@@ -15,7 +15,8 @@ namespace Depra.Spine.FMOD.Runtime.Utils
 	[AddComponentMenu(MENU_NAME, DEFAULT_ORDER)]
 	internal sealed class FMODEventFollowingRigidbody2D : FMODEventDecorator {
 
-		private const string MENU_NAME = MODULE_PATH + "/" + nameof(FMODEventFollowingRigidbody2D);
+		private const string FILE_NAME = nameof(FMODEventFollowingRigidbody2D);
+		private const string MENU_NAME = MODULE_PATH + SEPARATOR + FILE_NAME;
 
 		[SerializeField] private Rigidbody2D _rigidbody;
 
