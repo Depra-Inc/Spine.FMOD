@@ -1,5 +1,5 @@
 {
-    "name": "Depra.Spine.Integration.FMOD",
+    "name": "Depra.Spine.FMOD",
     "rootNamespace": "",
     "references": [
         "spine-csharp",
