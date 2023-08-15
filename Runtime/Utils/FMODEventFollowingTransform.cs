@@ -13,14 +13,14 @@ namespace Depra.Spine.FMOD.Runtime.Utils
 	/// If not set, the sound will be played at the transform position.
 	/// </summary>
 	[AddComponentMenu(MENU_NAME, DEFAULT_ORDER)]
-	internal sealed class FMODEventFollowingTransform : FMODEventDecorator
+	internal sealed class FMODEventFollowingTransform : FMODEventExtension
 	{
 		private const string FILE_NAME = nameof(FMODEventFollowingTransform);
 		private const string MENU_NAME = MODULE_PATH + SEPARATOR + FILE_NAME;
 
 		[SerializeField] private Transform _sourcePoint;
 
-		public override void Decorate(string eventName, EventInstance eventInstance) =>
+		public override void Apply(string eventName, EventInstance eventInstance) =>
 			RuntimeManager.AttachInstanceToGameObject(eventInstance, _sourcePoint);
 
 		private void OnValidate() => _sourcePoint ??= transform;

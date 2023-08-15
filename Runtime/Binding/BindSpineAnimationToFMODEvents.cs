@@ -60,7 +60,7 @@ namespace Depra.Spine.FMOD.Runtime.Binding
 			[SerializeField] private EventReference _fmodEvent;
 
 			[Tooltip("Optional extensions for the event instance.")]
-			[SerializeField] private FMODEventDecorator[] _decorators;
+			[SerializeField] private FMODEventExtension[] _decorators;
 
 			string ISoundEvent.Key => _spineAnimation;
 

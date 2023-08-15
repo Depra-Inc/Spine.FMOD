@@ -6,8 +6,8 @@ using UnityEngine;
 
 namespace Depra.Spine.FMOD.Runtime.Utils
 {
-	internal abstract class FMODEventDecorator : MonoBehaviour
+	internal abstract class FMODEventExtension : MonoBehaviour
 	{
-		public abstract void Decorate(string eventName, EventInstance eventInstance);
+		public abstract void Apply(string eventName, EventInstance eventInstance);
 	}
 }

@@ -2,7 +2,7 @@
   "name": "com.depra.spine.fmod",
   "displayName": "Depra.Spine.FMOD",
   "description": "Integration module for UnityEngine to support FMOD sound event calls via Spine.",
-  "version": "0.1.9",
+  "version": "0.2.0",
   "unity": "2021.3",
   "dependencies": {
     "com.esotericsoftware.spine.spine-csharp": "4.1.0",
@@ -22,7 +22,10 @@
     "url": "https://github.com/Depression-aggression"
   },
   "license": "Apache-2.0",
-  "homepage": "https://github.com/Depression-aggression/Spine.FMOD#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mob-sakai/GitDependencyResolverForUnity.git"
+  },
   "samples": [
     {
       "displayName": "Binding Samples",

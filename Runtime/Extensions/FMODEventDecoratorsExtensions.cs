@@ -9,12 +9,12 @@ namespace Depra.Spine.FMOD.Runtime.Extensions
 {
 	internal static class FMODEventDecoratorsExtensions
 	{
-		public static void Decorate(this IEnumerable<FMODEventDecorator> self, string eventName,
+		public static void Decorate(this IEnumerable<FMODEventExtension> self, string eventName,
 			EventInstance eventInstance)
 		{
 			foreach (var decorator in self)
 			{
-				decorator.Decorate(eventName, eventInstance);
+				decorator.Apply(eventName, eventInstance);
 			}
 		}
 	}
