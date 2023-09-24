@@ -12,12 +12,9 @@ namespace Depra.Spine.FMOD.Runtime.Utils
 	/// Adds sound following the target <see cref="Rigidbody"/>.
 	/// If not set, the sound will be played at the transform position.
 	/// </summary>
-	[AddComponentMenu(MENU_NAME, DEFAULT_ORDER)]
+	[AddComponentMenu(MODULE_PATH + SEPARATOR + nameof(FMODEventFollowingRigidbody), DEFAULT_ORDER)]
 	internal sealed class FMODEventFollowingRigidbody : FMODEventExtension
 	{
-		private const string FILE_NAME = nameof(FMODEventFollowingRigidbody);
-		private const string MENU_NAME = MODULE_PATH + SEPARATOR + FILE_NAME;
-
 		[SerializeField] private Rigidbody _rigidbody;
 
 		public override void Apply(string eventName, EventInstance eventInstance) =>

@@ -5,10 +5,11 @@ namespace Depra.Spine.FMOD.Runtime.Common
 {
 	internal static class Constants
 	{
-		public const string FRAMEWORK_NAME = "Depra";
-		public const string MODULE_NAME = "Spine.FMOD";
-		public const string MODULE_PATH = FRAMEWORK_NAME + "/" + MODULE_NAME;
+		public const string FRAMEWORK_NAME = nameof(Depra);
+		public const string MODULE_NAME = nameof(Spine) + DOT + nameof(FMOD);
+		public const string MODULE_PATH = FRAMEWORK_NAME + SEPARATOR + MODULE_NAME;
 
+		internal const string DOT = ".";
 		internal const string SEPARATOR = "/";
 		internal const int DEFAULT_ORDER = 52;
 	}

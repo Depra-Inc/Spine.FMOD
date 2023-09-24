@@ -7,12 +7,9 @@ using static Depra.Spine.FMOD.Runtime.Common.Constants;
 
 namespace Depra.Spine.FMOD.Runtime.Utils
 {
-	[AddComponentMenu(MENU_NAME, DEFAULT_ORDER)]
+	[AddComponentMenu(MODULE_PATH + SEPARATOR + nameof(FMODEventLogging), DEFAULT_ORDER)]
 	internal sealed class FMODEventLogging : FMODEventExtension
 	{
-		private const string FILE_NAME = nameof(FMODEventLogging);
-		private const string MENU_NAME = MODULE_PATH + SEPARATOR + FILE_NAME;
-
 		[SerializeField] private string _format = "FMOD Event was triggered: {0}";
 
 		public override void Apply(string eventName, EventInstance eventInstance) =>
