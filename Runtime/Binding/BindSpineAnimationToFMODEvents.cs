@@ -5,7 +5,9 @@ using System;
 using System.Collections.Generic;
 using Depra.Spine.FMOD.Runtime.Extensions;
 using Depra.Spine.FMOD.Runtime.Utils;
+using FMOD.Studio;
 using FMODUnity;
+using JetBrains.Annotations;
 using Spine;
 using Spine.Unity;
 using UnityEngine;
@@ -13,12 +15,9 @@ using static Depra.Spine.FMOD.Runtime.Common.Constants;
 
 namespace Depra.Spine.FMOD.Runtime.Binding
 {
-	[AddComponentMenu(MENU_NAME, DEFAULT_ORDER)]
+	[AddComponentMenu(MODULE_PATH + SEPARATOR + nameof(BindSpineAnimationToFMODEvents), DEFAULT_ORDER)]
 	internal sealed class BindSpineAnimationToFMODEvents : MonoBehaviour
 	{
-		private const string FILE_NAME = nameof(BindSpineAnimationToFMODEvents);
-		private const string MENU_NAME = MODULE_PATH + SEPARATOR + FILE_NAME;
-
 		[SerializeField] private SkeletonAnimation _animation;
 		[SerializeField] private SoundEventDefinition[] _soundEvents;
 
@@ -40,6 +39,15 @@ namespace Depra.Spine.FMOD.Runtime.Binding
 
 		private void OnValidate() => _animation ??= GetComponent<SkeletonAnimation>();
 
+		[UsedImplicitly]
+		public void Stop(string eventName)
+		{
+			if (_eventsMap.TryGetValue(eventName, out var soundEvent))
+			{
+				soundEvent.Stop();
+			}
+		}
+
 		private void OnAnimationStarted(TrackEntry trackEntry)
 		{
 			var animationName = trackEntry.Animation.Name;
@@ -58,18 +66,23 @@ namespace Depra.Spine.FMOD.Runtime.Binding
 
 			[Tooltip("Insert FMOD event here.")]
 			[SerializeField] private EventReference _fmodEvent;
+			[SerializeField] private STOP_MODE _stopMode;
 
 			[Tooltip("Optional extensions for the event instance.")]
 			[SerializeField] private FMODEventExtension[] _decorators;
 
 			string ISoundEvent.Key => _spineAnimation;
 
+			private EventInstance _eventInstance;
+
 			void ISoundEvent.Play(string animationName)
 			{
-				var eventInstance = RuntimeManager.CreateInstance(_fmodEvent);
-				eventInstance.start();
-				_decorators.Decorate(animationName, eventInstance);
+				_eventInstance = RuntimeManager.CreateInstance(_fmodEvent);
+				_eventInstance.start();
+				_decorators.Decorate(animationName, _eventInstance);
 			}
+
+			void ISoundEvent.Stop() => _eventInstance.stop(_stopMode);
 		}
 	}
 }

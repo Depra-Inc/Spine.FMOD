@@ -8,5 +8,7 @@ namespace Depra.Spine.FMOD.Runtime.Binding
 		string Key { get; }
 
 		void Play(string key);
+
+		void Stop();
 	}
 }

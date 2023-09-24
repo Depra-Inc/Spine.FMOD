@@ -5,7 +5,9 @@ using System;
 using System.Collections.Generic;
 using Depra.Spine.FMOD.Runtime.Extensions;
 using Depra.Spine.FMOD.Runtime.Utils;
+using FMOD.Studio;
 using FMODUnity;
+using JetBrains.Annotations;
 using Spine;
 using Spine.Unity;
 using UnityEngine;
@@ -14,12 +16,9 @@ using Event = Spine.Event;
 
 namespace Depra.Spine.FMOD.Runtime.Binding
 {
-	[AddComponentMenu(MENU_NAME, DEFAULT_ORDER)]
+	[AddComponentMenu(MODULE_PATH + SEPARATOR + nameof(BindSpineEventsToFMODEvents), DEFAULT_ORDER)]
 	internal sealed class BindSpineEventsToFMODEvents : MonoBehaviour
 	{
-		private const string FILE_NAME = nameof(BindSpineEventsToFMODEvents);
-		private const string MENU_NAME = MODULE_PATH + SEPARATOR + FILE_NAME;
-
 		[SerializeField] private SkeletonAnimation _animation;
 		[SerializeField] private SoundEventDefinition[] _soundEvents;
 
@@ -32,6 +31,15 @@ namespace Depra.Spine.FMOD.Runtime.Binding
 		private void OnDisable() => _animation.AnimationState.Event += OnEvent;
 
 		private void OnValidate() => _animation ??= GetComponent<SkeletonAnimation>();
+
+		[UsedImplicitly]
+		public void Stop(string eventName)
+		{
+			if (_eventsMap.TryGetValue(eventName, out var animationSound))
+			{
+				animationSound.Stop();
+			}
+		}
 
 		private void OnEvent(TrackEntry track, Event @event)
 		{
@@ -52,17 +60,23 @@ namespace Depra.Spine.FMOD.Runtime.Binding
 			[Tooltip("Insert FMOD Event here")]
 			[SerializeField] public EventReference _fmodEvent;
 
+			[SerializeField] private STOP_MODE _stopMode;
+
 			[Tooltip("Optional extensions for the event instance.")]
 			[SerializeField] private FMODEventExtension[] _decorators;
+
+			private EventInstance _eventInstance;
 
 			string ISoundEvent.Key => _spineEvent;
 
 			void ISoundEvent.Play(string eventName)
 			{
-				var eventInstance = RuntimeManager.CreateInstance(_fmodEvent);
-				_decorators.Decorate(eventName, eventInstance);
-				eventInstance.start();
+				_eventInstance = RuntimeManager.CreateInstance(_fmodEvent);
+				_decorators.Decorate(eventName, _eventInstance);
+				_eventInstance.start();
 			}
+
+			void ISoundEvent.Stop() => _eventInstance.stop(_stopMode);
 		}
 	}
 }

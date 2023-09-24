@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using Depra.Spine.FMOD.Runtime.Extensions;
 using Depra.Spine.FMOD.Runtime.Utils;
 using FMODUnity;
+using JetBrains.Annotations;
 using Spine;
 using Spine.Unity;
 using UnityEngine;
@@ -13,12 +14,9 @@ using static Depra.Spine.FMOD.Runtime.Common.Constants;
 
 namespace Depra.Spine.FMOD.Runtime.Binding
 {
-	[AddComponentMenu(MENU_NAME, DEFAULT_ORDER)]
+	[AddComponentMenu(MODULE_PATH + SEPARATOR + nameof(BindSpineAnimationToFMODEmitter), DEFAULT_ORDER)]
 	internal sealed class BindSpineAnimationToFMODEmitter : MonoBehaviour
 	{
-		private const string FILE_NAME = nameof(BindSpineAnimationToFMODEmitter);
-		private const string MENU_NAME = MODULE_PATH + SEPARATOR + FILE_NAME;
-
 		[SerializeField] private SkeletonAnimation _animation;
 		[SerializeField] private SoundEventDefinition[] _soundEvents;
 
@@ -39,6 +37,15 @@ namespace Depra.Spine.FMOD.Runtime.Binding
 		private void OnDisable() => _animation.AnimationState.Start -= OnAnimationStarted;
 
 		private void OnValidate() => _animation ??= GetComponent<SkeletonAnimation>();
+
+		[UsedImplicitly]
+		public void Stop(string eventName)
+		{
+			if (_eventsMap.TryGetValue(eventName, out var soundEvent))
+			{
+				soundEvent.Stop();
+			}
+		}
 
 		private void OnAnimationStarted(TrackEntry trackEntry)
 		{
@@ -69,6 +76,8 @@ namespace Depra.Spine.FMOD.Runtime.Binding
 				_emitter.Play();
 				_decorators.Decorate(animationName, _emitter.EventInstance);
 			}
+
+			void ISoundEvent.Stop() => _emitter.Stop();
 		}
 	}
 }

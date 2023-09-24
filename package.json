@@ -2,7 +2,7 @@
   "name": "com.depra.spine.fmod",
   "displayName": "Depra.Spine.FMOD",
   "description": "Integration module for UnityEngine to support FMOD sound event calls via Spine.",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "unity": "2021.3",
   "dependencies": {
     "com.esotericsoftware.spine.spine-csharp": "4.1.0",
