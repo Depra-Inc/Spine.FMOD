@@ -1,6 +1,6 @@
 {
     "name": "Depra.Spine.FMOD",
-    "rootNamespace": "",
+    "rootNamespace": "Depra.Spine.FMOD",
     "references": [
         "spine-csharp",
         "spine-unity",
@@ -11,7 +11,7 @@
     "allowUnsafeCode": false,
     "overrideReferences": false,
     "precompiledReferences": [],
-    "autoReferenced": true,
+    "autoReferenced": false,
     "defineConstraints": [],
     "versionDefines": [],
     "noEngineReferences": false

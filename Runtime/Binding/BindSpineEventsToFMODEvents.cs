@@ -11,6 +11,7 @@ using JetBrains.Annotations;
 using Spine;
 using Spine.Unity;
 using UnityEngine;
+using static FMOD.Studio.STOP_MODE;
 using static Depra.Spine.FMOD.Runtime.Common.Constants;
 using Event = Spine.Event;
 
