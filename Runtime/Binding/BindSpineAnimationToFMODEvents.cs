@@ -11,7 +11,7 @@ using JetBrains.Annotations;
 using Spine;
 using Spine.Unity;
 using UnityEngine;
-using static FMOD.Studio.STOP_MODE;
+using StopMode = FMOD.Studio.STOP_MODE;
 using static Depra.Spine.FMOD.Runtime.Common.Constants;
 
 namespace Depra.Spine.FMOD.Runtime.Binding
@@ -67,7 +67,7 @@ namespace Depra.Spine.FMOD.Runtime.Binding
 
 			[Tooltip("Insert FMOD event here.")]
 			[SerializeField] private EventReference _fmodEvent;
-			[SerializeField] private STOP_MODE _stopMode;
+			[SerializeField] private StopMode _stopMode;
 
 			[Tooltip("Optional extensions for the event instance.")]
 			[SerializeField] private FMODEventExtension[] _decorators;
