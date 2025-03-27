@@ -1,7 +1,7 @@
-﻿// Copyright © 2023 Nikolay Melnikov. All rights reserved.
-// SPDX-License-Identifier: Apache-2.0
+﻿// SPDX-License-Identifier: Apache-2.0
+// © 2023-2025 Depra <n.melnikov@depra.org>
 
-namespace Depra.Spine.FMOD.Runtime.Binding
+namespace Depra.Spine.FMOD
 {
 	internal interface ISoundEvent
 	{

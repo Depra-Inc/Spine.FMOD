@@ -1,16 +1,16 @@
-﻿// Copyright © 2023 Nikolay Melnikov. All rights reserved.
-// SPDX-License-Identifier: Apache-2.0
+﻿// SPDX-License-Identifier: Apache-2.0
+// © 2023-2025 Depra <n.melnikov@depra.org>
 
 using System;
 using FMOD;
 using FMOD.Studio;
 using UnityEngine;
 using UnityEngine.Events;
-using static Depra.Spine.FMOD.Runtime.Common.Constants;
+using static Depra.Spine.FMOD.Constants;
 
-namespace Depra.Spine.FMOD.Runtime.Utils
+namespace Depra.Spine.FMOD
 {
-	[AddComponentMenu(MODULE_PATH + SEPARATOR + nameof(FMODEventCallbacks), DEFAULT_ORDER)]
+	[AddComponentMenu(MENU_PATH + nameof(FMODEventCallbacks), DEFAULT_ORDER)]
 	internal sealed class FMODEventCallbacks : FMODEventExtension
 	{
 		[SerializeField] private Pair[] _callbacks;

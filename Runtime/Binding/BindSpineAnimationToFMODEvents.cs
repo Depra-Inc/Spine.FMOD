@@ -1,10 +1,8 @@
-﻿// Copyright © 2023 Nikolay Melnikov. All rights reserved.
-// SPDX-License-Identifier: Apache-2.0
+﻿// SPDX-License-Identifier: Apache-2.0
+// © 2023-2025 Depra <n.melnikov@depra.org>
 
 using System;
 using System.Collections.Generic;
-using Depra.Spine.FMOD.Runtime.Extensions;
-using Depra.Spine.FMOD.Runtime.Utils;
 using FMOD.Studio;
 using FMODUnity;
 using JetBrains.Annotations;
@@ -12,11 +10,11 @@ using Spine;
 using Spine.Unity;
 using UnityEngine;
 using StopMode = FMOD.Studio.STOP_MODE;
-using static Depra.Spine.FMOD.Runtime.Common.Constants;
+using static Depra.Spine.FMOD.Constants;
 
-namespace Depra.Spine.FMOD.Runtime.Binding
+namespace Depra.Spine.FMOD
 {
-	[AddComponentMenu(MODULE_PATH + SEPARATOR + nameof(BindSpineAnimationToFMODEvents), DEFAULT_ORDER)]
+	[AddComponentMenu(MENU_PATH + nameof(BindSpineAnimationToFMODEvents), DEFAULT_ORDER)]
 	internal sealed class BindSpineAnimationToFMODEvents : MonoBehaviour
 	{
 		[SerializeField] private SkeletonAnimation _animation;

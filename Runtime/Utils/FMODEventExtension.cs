@@ -1,10 +1,10 @@
-﻿// Copyright © 2023 Nikolay Melnikov. All rights reserved.
-// SPDX-License-Identifier: Apache-2.0
+﻿// SPDX-License-Identifier: Apache-2.0
+// © 2023-2025 Depra <n.melnikov@depra.org>
 
 using FMOD.Studio;
 using UnityEngine;
 
-namespace Depra.Spine.FMOD.Runtime.Utils
+namespace Depra.Spine.FMOD
 {
 	internal abstract class FMODEventExtension : MonoBehaviour
 	{

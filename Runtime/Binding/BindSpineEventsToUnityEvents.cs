@@ -3,18 +3,17 @@
 
 using System;
 using System.Collections.Generic;
-using FMODUnity;
-using JetBrains.Annotations;
 using Spine;
 using Spine.Unity;
 using UnityEngine;
+using UnityEngine.Events;
 using Event = Spine.Event;
 using static Depra.Spine.FMOD.Constants;
 
 namespace Depra.Spine.FMOD
 {
-	[AddComponentMenu(MENU_PATH + nameof(BindSpineEventsToFMODEmitter), DEFAULT_ORDER)]
-	internal sealed class BindSpineEventsToFMODEmitter : MonoBehaviour
+	[AddComponentMenu(MENU_PATH + nameof(BindSpineEventsToUnityEvents), DEFAULT_ORDER)]
+	internal sealed class BindSpineEventsToUnityEvents : MonoBehaviour
 	{
 		[SerializeField] private SkeletonAnimation _animation;
 		[SerializeField] private SoundEventDefinition[] _soundEvents;
@@ -28,15 +27,6 @@ namespace Depra.Spine.FMOD
 		private void OnDisable() => _animation.AnimationState.Event -= OnEvent;
 
 		private void OnValidate() => _animation ??= GetComponent<SkeletonAnimation>();
-
-		[UsedImplicitly]
-		public void Stop(string eventName)
-		{
-			if (_eventsMap.TryGetValue(eventName, out var soundEvent))
-			{
-				soundEvent.Stop();
-			}
-		}
 
 		private void OnEvent(TrackEntry entry, Event @event)
 		{
@@ -52,23 +42,16 @@ namespace Depra.Spine.FMOD
 		{
 			[Tooltip("Insert Spine audio event name here")]
 			[SpineEvent(dataField: nameof(_animation), fallbackToTextField: true)]
-			[SerializeField] private string _spineEvent;
+			[SerializeField]
+			private string _spineEvent;
 
-			[Tooltip("Insert FMOD Studio Event Emitter")]
-			[SerializeField] private StudioEventEmitter _emitter;
-
-			[Tooltip("Optional extensions for the event instance.")]
-			[SerializeField] private FMODEventExtension[] _decorators;
+			[SerializeField] private UnityEvent<string> _unityEvent;
 
 			string ISoundEvent.Key => _spineEvent;
 
-			void ISoundEvent.Play(string eventName)
-			{
-				_emitter.Play();
-				_decorators.Decorate(eventName, _emitter.EventInstance);
-			}
+			void ISoundEvent.Play(string eventName) => _unityEvent.Invoke(eventName);
 
-			void ISoundEvent.Stop() => _emitter.Stop();
+			void ISoundEvent.Stop() { }
 		}
 	}
 }
